@@ -1,4 +1,5 @@
 import requests
+import json
 
 apiroot = 'http://ws.audioscrobbler.com/2.0/'
 
@@ -14,7 +15,7 @@ def get_api_key():
 
 api_key = get_api_key()
 
-def getter(method, params, apikey=api_key, json=False):
+def getter(method, params, apikey=api_key, get_json=False):
 
     assert type(method) == str
     assert type(params) == dict
@@ -26,6 +27,9 @@ def getter(method, params, apikey=api_key, json=False):
         url += '&' + param + '=' + params[param]
 
     url += '&api_key=' + apikey
+
+    if get_json:
+        url += "&format=json"
 
     text = requests.get(url).text
 
