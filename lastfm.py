@@ -34,3 +34,16 @@ def getter(method, params, apikey=api_key, get_json=False):
     text = requests.get(url).text
 
     return text
+
+def user_gettoptracks(user, period=None, limit=None, page=None, apikey=api_key,
+        get_json=False):
+
+    params = {'user':user}
+    if period:
+        params['period'] = period
+    if limit:
+        params['limit'] = limit
+    if page:
+        params['page'] = page
+
+    return getter("user.gettoptracks", params, apikey, get_json)
